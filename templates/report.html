@@ -1,0 +1,107 @@
+<!DOCTYPE html><html class=''>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0," />
+<link rel='stylesheet' href='{{ url_for('static', filename='css/bookings.css') }}' />
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+
+  <h1>Booking Status</h1>
+      <hr>
+
+<script>
+(function() {
+var d3 = Plotly.d3;
+var WIDTH_IN_PERCENT_OF_PARENT = 60;
+
+var gd3 = d3.select('body')
+    .append('div')
+    .style({
+        width: WIDTH_IN_PERCENT_OF_PARENT + '%',
+        'margin-left': (100 - WIDTH_IN_PERCENT_OF_PARENT) / 2 + '%'
+    });
+var gd4 = d3.select('body')
+    .append('div')
+    .style({
+        width: WIDTH_IN_PERCENT_OF_PARENT + '%',
+        'margin-left': (100 - WIDTH_IN_PERCENT_OF_PARENT) / 2 + '%'
+    });
+
+var gd5 = d3.select('body')
+    .append('div')
+    .style({
+        width: WIDTH_IN_PERCENT_OF_PARENT + '%',
+        'margin-left': (100 - WIDTH_IN_PERCENT_OF_PARENT) / 2 + '%'
+    });
+
+var bar  = gd3.node();
+var pie2 = gd4.node();
+var pie  = gd5.node();
+
+Plotly.plot(pie, [{
+    type: 'pie',
+    values: [{{tcda}}, {{thta}}, {{tscdf}}],
+		labels: ['CDA', 'HTA', 'SCDF HQ'],
+}], {
+    title: 'Distribution of Slots',
+    font: {
+        size: 16
+    }
+});
+
+var booked = {
+  x: [{{bcda}},{{bhta}},{{bscdf}}],
+  y: ['CDA', 'HTA', 'SCDF HQ'],
+  name: 'Booked',
+  orientation: 'h',
+  marker: {
+    color: 'rgba(55,128,191,0.6)',
+    width: 1
+  },
+  type: 'bar'
+};
+
+var available = {
+  x: [{{fcda}}, {{fhta}}, {{fscdf}}],
+  y: ['CDA', 'HTA', 'SCDF HQ'],
+  name: 'Available',
+  orientation: 'h',
+  type: 'bar',
+  marker: {
+    color: 'rgba(255,153,51,0.6)',
+    width: 1
+  }
+};
+
+var data = [booked, available];
+
+var layout = {
+  title: 'Booked vs Available',
+  barmode: 'stack'
+};
+
+Plotly.plot(bar, data, layout);
+
+
+Plotly.plot(pie2, [{
+    type: 'pie',
+		values: [{{bcase}}, {{ucase}}, {{xcase}}],
+		labels: ['Booked', 'Pending', 'Expired'],
+}], {
+    title: 'Booking Status',
+    font: {
+        size: 16
+    }
+});
+
+window.onresize = function() {
+    Plotly.Plots.resize(bar);
+    Plotly.Plots.resize(pie2);
+    Plotly.Plots.resize(pie);
+};
+
+})();
+</script>
+</body></html>

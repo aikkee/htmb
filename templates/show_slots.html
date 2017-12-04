@@ -1,0 +1,56 @@
+<!DOCTYPE html><html class=''>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0," />
+<link rel='stylesheet' href='{{ url_for('static', filename='stylesheets/bookings.css') }}' />
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600' rel='stylesheet' type='text/css'>
+<style>
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+body {
+	font-family: 'Source Sans Pro', sans-serif;
+}
+table { 
+  width: 100%; 
+  border-collapse: collapse; 
+}
+/* Zebra striping */
+tr:nth-of-type(odd) { 
+  background: #eee; 
+}
+th { 
+  background: #333; 
+  color: white; 
+  font-weight: bold; 
+}
+td, th { 
+  padding: 6px; 
+  border: 1px solid #ccc; 
+  text-align: left; 
+}
+</style>
+</head><body>
+
+<h1>HTMB Slots</h1>
+    <hr>
+		<table>
+			<thead>
+				<th>ID</th>
+				<th>Location</th>
+				<th>Date Time</th>
+				<th>Allocated</th>
+				<th>Available</th>
+			</thead>
+			<tbody>
+				{% for slot in slots %}
+				<tr>
+					<td>{{ slot.id }}</td>
+					<td>{{ slot.location}}</td>
+					<td>{{ slot.description}}</td>
+					<td>{{ slot.capacity}}</td>
+					<td>{{ slot.available}}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+</body></html>
+

@@ -1,0 +1,42 @@
+<!DOCTYPE html><html class=''>
+<head>
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+<link rel='stylesheet' href='{{ url_for('static', filename='css/bookings.css') }}' />
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600' rel='stylesheet' type='text/css'>
+<link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="testbox">
+  <h1>HTMB Booking</h1>
+  <form id="htmbForm" action="/save" method="POST" name="booking">
+    <hr>
+		{% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+        {% for message in messages %}
+            <li>{{ message }} </li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+		{{ form.hidden_tag() }}
+		<label id="icon" for="name"><i class="icon-flag"></i></label>
+		{{ form.location(id="location_select") }}
+		<label id="icon" for="name"><i class="icon-calendar"></i></label>
+		{{ form.date_time(id="slot_select") }}
+		<input type="hidden" id="actionType" name="actionType" value="book"/>
+		{% if isnew == 'no' %}
+		<a href="#" class="button" onclick="document.getElementById('actionType').value='change';document.getElementById('htmbForm').submit();">Change</a>
+		{% else %}
+		<a href="#" class="button" onclick="document.getElementById('htmbForm').submit();">Book</a>
+		{% endif %}
+
+  </form>
+</div>
+
+<script src="http://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="{{ url_for('static', filename='bookings.js') }}"></script>
+</body></html>
+

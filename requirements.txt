@@ -1,0 +1,10 @@
+gunicorn
+Flask==0.10.1
+Flask-Script==2.0.5
+Flask-SQLAlchemy==2.0
+Flask-Migrate==1.6.0
+Flask-WTF==0.12
+Flask-Excel==0.0.3
+pyexcel==0.1.7
+pyexcel-io==0.0.8
+pyexcel-webio==0.0.3

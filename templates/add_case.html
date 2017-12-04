@@ -1,0 +1,49 @@
+<!DOCTYPE html><html class=''>
+<head>
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+<link rel='stylesheet' href='{{ url_for('static', filename='css/bookings.css') }}' />
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600' rel='stylesheet' type='text/css'>
+<!--link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet"-->
+<script src="https://use.fontawesome.com/800e7fe4d0.js"></script>
+<script>
+function default_expiry_date(){
+    var date = new Date();
+    var newdate = new Date(date);
+
+    newdate.setDate(newdate.getDate() + 3);
+    
+    var dd = newdate.getDate();
+    var mm = newdate.getMonth() + 1;
+    var y = newdate.getFullYear();
+
+    var expiryDate = y + '-' + ("00" + mm).slice(-2) + '-' + ("00" + dd).slice(-2);
+    document.addCaseForm.expiry.value = expiryDate;
+}
+</script>
+</head><body onLoad="default_expiry_date()">
+
+<div class="testbox">
+  <h1>New Case</h1>
+
+  <form name="addCaseForm" action="/admin/add_case" id="addCaseForm" method="POST">
+      <hr>
+		{% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+        {% for message in messages %}
+            <li>{{ message }} </li>
+        {% endfor %}
+        </ul>
+	<a href="/admin/add_case" class="button">New</a>
+      {% else %}
+  <label id="icon" for="ref"><i class="fa fa-user-circle" aria-hidden="true"></i><!--i class="icon-user-md"></i--></label>
+  <input type="text" name="ref" id="ref" placeholder="e.g. 12345A" required/>
+	<label id="icon" for="expiry"><i class="fa fa-flag" aria-hidden="true"></i></label>
+	<input type="text" name="expiry" id="expiry" placeholder="YYYY-MM-DD" required/>
+	<a href="#" class="button" onclick="document.getElementById('addCaseForm').submit();">Activate</a>
+			{% endif %}
+    {% endwith %}
+  </form>
+</div>
+</body></html>
+
