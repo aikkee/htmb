@@ -152,10 +152,10 @@ def show_for_booking(triage, exp, location=None):
     earliest_date = exp_date + datetime.timedelta(days=3)
     # change triage description to date object
     triage_date = datetime.datetime.strptime(triage.description[:11], '%d %b %Y').date()
-    # if location == None:
-    #    return triage.available > 0 and triage_date > earliest_date
-    #else:
-    return triage.location == location and triage.available > 0 and triage_date > earliest_date
+    if location == None:
+        return triage.available > 0 and triage_date > earliest_date
+    else:
+        return triage.location == location and triage.available > 0 and triage_date > earliest_date
          
 
 @application.route("/slotsfor/<location>/", methods=["GET", "POST"])
