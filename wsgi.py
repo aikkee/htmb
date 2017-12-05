@@ -144,12 +144,16 @@ def redirect_url(default='index'):
 
 def show_for_booking(triage, exp, location=None):
     # handle reference expiry date
+
     exp_date = date( int(exp[:4]), int(exp[5:7]), int(exp[8:10]) )
     earliest_date = exp_date + datetime.timedelta(days=3)
     # change triage description to date object
     triage_date = datetime.datetime.strptime(triage.description[:11], '%d %b %Y').date()
-
-    return triage.location == location and triage.available > 0 and triage_date > earliest_date
+    if location == None:
+        return triage.available > 0 and triage_date > earliest_date
+    else:
+        return triage.location == location and triage.available > 0 and triage_date > earliest_date
+         
 
 @application.route("/slotsfor/<location>/", methods=["GET", "POST"])
 def get_slots(location):
