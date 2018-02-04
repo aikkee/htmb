@@ -135,8 +135,7 @@ def save():
         application.logger.info('Draw down from Triage ID: %s for Reference ID: %s' % (tid, reference.id))
 
         db.session.commit()
-        flash('Thank you for your submission.  Your session on %s at %s is confirmed.' %
-                (triage.description, triage.location))
+        flash('Thank you for your submission. You will receive our SMS confirmation soon.')
         return render_template('acknowledge.html')
 
 
@@ -149,7 +148,7 @@ def show_for_booking(triage, exp, location=None):
     # handle reference expiry date
 
     exp_date = date( int(exp[:4]), int(exp[5:7]), int(exp[8:10]) )
-    earliest_date = exp_date + datetime.timedelta(days=3)
+    earliest_date = exp_date + datetime.timedelta(days=5)
     # change triage description to date object
     triage_date = datetime.datetime.strptime(triage.description[:11], '%d %b %Y').date()
     if location == None:
