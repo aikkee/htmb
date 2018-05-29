@@ -1,10 +1,9 @@
 <!DOCTYPE html><html class=''>
 <head>
-<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 <link rel='stylesheet' href='{{ url_for('static', filename='css/bookings.css') }}' />
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600' rel='stylesheet' type='text/css'>
-<!--link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet"-->
-<script src="https://use.fontawesome.com/800e7fe4d0.js"></script>
+<link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
 <script>
 function default_expiry_date(){
     var date = new Date();
@@ -36,9 +35,11 @@ function default_expiry_date(){
         </ul>
 	<a href="/admin/add_case" class="button">New</a>
       {% else %}
-  <label id="icon" for="ref"><i class="fa fa-user-circle" aria-hidden="true"></i><!--i class="icon-user-md"></i--></label>
+  <label id="icon" for="name"><i class="icon-qrcode"></i></label>
+  <input type="text" name="rtype" id="rtype" placeholder="Type" required/>
+  <label id="icon" for="ref"><i class="icon-user"></i></label>
   <input type="text" name="ref" id="ref" placeholder="e.g. 12345A" required/>
-	<label id="icon" for="expiry"><i class="fa fa-flag" aria-hidden="true"></i></label>
+	<label id="icon" for="expiry"><i class="icon-calendar"></i></label>
 	<input type="text" name="expiry" id="expiry" placeholder="YYYY-MM-DD" required/>
 	<a href="#" class="button" onclick="document.getElementById('addCaseForm').submit();">Activate</a>
 			{% endif %}

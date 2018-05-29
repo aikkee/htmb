@@ -1,6 +1,6 @@
 <!DOCTYPE html><html class=''>
 <head>
-<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 <link rel='stylesheet' href='{{ url_for('static', filename='css/bookings.css') }}' />
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600' rel='stylesheet' type='text/css'>
 <link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
@@ -22,6 +22,8 @@
     {% endwith %}
   <label id="icon" for="name"><i class="icon-tag"></i></label>
   <input type="text" name="ref" id="ref" placeholder="Reference" required/>
+  <label id="icon" for="name"><i class="icon-qrcode"></i></label>
+  <input type="text" name="rtype" id="rtype" placeholder="RType" required/>
 	<a href="#" class="button" onclick="document.getElementById('retrieveCaseForm').submit();">Retrieve</a>
   </form>
 </div>
