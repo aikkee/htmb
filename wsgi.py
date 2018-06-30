@@ -139,7 +139,7 @@ def save():
         application.logger.info('Draw down from Resource ID: %s for Reference ID: %s' % (r_id, reference.id))
 
         db.session.commit()
-        flash('Thank you for your submission.  Your session on %s at %s is confirmed.' %
+        flash('Thank you for making your booking on %s at %s. Please wait for our confirmation SMS before proceeding to the session.' %
                 (resource.description, resource.location))
         return render_template('acknowledge.html')
 
