@@ -1,1 +1,2 @@
 APP_CONFIG=bookings.cfg
+APP_FILE=wsgi.py
