@@ -222,12 +222,13 @@ def import_case():
             r = Reference()
             r.resource_type = row['RESOURCE_TYPE']
             r.booking_ref = row['BOOKING_REF']
-            r.expire_on = datetime.datetime.strptime(row['EXPIRE_ON'], \
+            print(f"......{type(row['EXPIRE_ON'])}")
+            r.expire_on = datetime.datetime.strptime(str(row['EXPIRE_ON']), \
                 "%Y-%m-%d %H:%M:%S")
             return r
-        request.save_book_to_database(field_name='file', session=db.session, \
-                                      tables=[Reference], \
-                                      initializers=([ref_init_func]))
+        request.save_to_database(field_name='file', session=db.session, \
+                                      table=Reference, \
+                                      initializer=ref_init_func)
         flash('HTMB cases created')
         return render_template('acknowledge.html')
     return render_template('import.html', title='Import HTMB Referrals')
@@ -243,9 +244,9 @@ def import_slot():
             r.capacity = row['CAPACITY']
             r.available = row['CAPACITY']
             return r
-        request.save_book_to_database(field_name='file', session=db.session, \
-                                      tables=[Resource], \
-                                      initializers=([resource_init_func]))
+        request.save_to_database(field_name='file', session=db.session, \
+                                      table=Resource, \
+                                      initializer=resource_init_func)
         flash('HTMB timeslot created')
         return render_template('acknowledge.html')
     return render_template('import.html', title='Import HTMB Timeslot')
