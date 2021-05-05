@@ -1,22 +1,24 @@
 import os
 import json
+import datetime
+import flask_excel as excel
+import flask_sqlalchemy
 
 from flask import Flask, render_template, redirect, session, url_for, \
                   request, make_response, send_from_directory, abort, flash
-from flask.ext import excel
-from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import and_
-import datetime
 from datetime import date
-from flask.ext.wtf import Form
+from flask_wtf import FlaskForm
 from wtforms import StringField, SelectField, HiddenField, validators
+from flask_sqlalchemy import SQLAlchemy
 
 application = Flask(__name__)
 application.config.from_pyfile('bookings.cfg')
 db = SQLAlchemy(application)
+excel.init_excel(application)
 
 # -- Forms --
-class BookingForm(Form):
+class BookingForm(FlaskForm):
     location = SelectField('location')
     date_time = SelectField('date_time')
     rtype = HiddenField('rtype')
@@ -91,8 +93,6 @@ def init():
     # obtain locations of available slots
     resources = Resource.query.filter(and_(Resource.available>0, Resource.rtype==rtype)).all()
 
-    print('Resource count for reference: %r' % len(resources))
-
     locations = list(set([(r.location) for r in resources if show_for_booking(r, str(reference.expire_on), rtype)]))
     bookingForm.location.choices = [('', 'Choose Location')] + [
         (l, l) for l in locations]
@@ -164,7 +164,6 @@ def show_for_booking(resource, exp, rtype, location=None):
         return resource.location == location and resource.rtype == rtype and resource.available > 0 and resource_date > earliest_date
          
 
-#TODO
 @application.route("/slotsfor/<location>/", methods=["GET", "POST"])
 def get_slots(location):
     resources = Resource.query.all()
@@ -278,6 +277,6 @@ def test():
 
 #----------main codes----------------------
 if __name__ == '__main__':
-    application.run()
+    application.run(host='0.0.0.0', port=8080)
 
  
