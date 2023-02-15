@@ -5,4 +5,4 @@ Flask-SQLAlchemy==2.5.0
 Flask-Migrate==1.6.0
 Flask-WTF==0.14.2
 Flask-Excel==0.0.7
-werkzeug==0.16.1
+werkzeug==2.2.3
